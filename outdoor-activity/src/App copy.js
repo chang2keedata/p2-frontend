@@ -1,8 +1,7 @@
-import { Nav, Navbar, Container } from 'react-bootstrap'
+import { Nav, Navbar, Container, Button, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
-// import axios from 'axios'
-import AddActivity from './AddActivity'
+// import ActivityForm from './ActivityForm'
 // import EditActivity from './EditActivity'
 import Activity from './Activity'
 import logo from './logo.svg';
@@ -11,12 +10,12 @@ import './style.css'
 export default class App extends React.Component {
 
   state = {
-    renderPage: "activity",
+    renderPage: "activity"
   }
 
-  renderAdd = () => {
+  renderBrowse = () => {
     this.setState({
-      renderPage: "add"
+      renderPage: "browse"
     })
   }
 
@@ -24,9 +23,8 @@ export default class App extends React.Component {
     if (this.state.renderPage === "activity") {
       return (<Activity />)
     }
-    if (this.state.renderPage === "add") {
-      // return (<AddActivity />)
-      return <AddActivity doneAddingActivity={this.doneAddingActivity} />
+    if (this.state.renderPage === "browse") {
+      return (<h1>browse</h1>)
     }
   }
 
@@ -35,9 +33,10 @@ export default class App extends React.Component {
       <React.Fragment>
 
         <div className="App">
-        <Navbar bg="dark" variant="dark" sticky="top" expand="sm" collapseOnSelect>
+        <Navbar bg="dark" variant="dark"
+          sticky="top" expand="sm" collapseOnSelect>
           <Navbar.Brand>
-            <img src={logo} width="70px" height="70px" />{' '}
+            <img src={logo} width="40px" height="40px" />{' '}
             Outdoor
           </Navbar.Brand>
 
@@ -45,11 +44,17 @@ export default class App extends React.Component {
           <Container>
             <Navbar.Collapse>
               <Nav>
-                <Nav.Link><span onClick={this.renderAdd}>AddActivity</span></Nav.Link>
+                <Nav.Link><span onClick={this.renderBrowse}>Browse</span></Nav.Link>
                 <Nav.Link>About Us</Nav.Link>
                 <Nav.Link>Contact Us</Nav.Link>
               </Nav>
             </Navbar.Collapse>
+          </Container>
+          <Container className="justify-content-end">
+            <Form>
+              <Form.Control type="search" placeholder="Search" className="me-5" />
+            </Form>
+            <Button className="m-1" variant="outline-success">Search</Button>
           </Container>
         </Navbar>
         </div>
@@ -60,7 +65,4 @@ export default class App extends React.Component {
       </React.Fragment>
     )
   }
-
-
-
 }
